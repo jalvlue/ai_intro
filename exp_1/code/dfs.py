@@ -4,9 +4,11 @@ import util
 
 def dfs_search(initial_state, goal_state):
     stack = deque()
-    start_node = util.Node(initial_state)
-    stack.append(start_node)
     came_from = dict()
+
+    start_node = util.Node(initial_state)
+
+    stack.append(start_node)
     came_from[initial_state] = None
 
     while stack:

@@ -52,13 +52,14 @@ class astarNode:
 
 def a_star_search(initial_state, goal_state, heuristic):
     frontier = PriorityQueue()
-
     came_from = dict()
+    cost_so_far = dict()
 
     start_node = astarNode(initial_state, goal_state, heuristic)
 
     frontier.put(start_node)
     came_from[initial_state] = None
+    cost_so_far[initial_state] = 0
 
     while not frontier.empty():
         current_node = frontier.get()
@@ -77,17 +78,21 @@ def a_star_search(initial_state, goal_state, heuristic):
                 new_row,
                 new_col,
             )
+            new_node = astarNode(
+                new_state,
+                goal_state,
+                heuristic,
+                current_node.get_cost() + 1,
+            )
 
             # utili.print_state(new_state)
 
-            if new_state not in came_from:
-                new_node = astarNode(
-                    new_state,
-                    goal_state,
-                    heuristic,
-                    current_node.get_cost() + 1,
-                )
+            if (
+                new_state not in came_from
+                or cost_so_far[new_state] > new_node.get_cost()
+            ):
                 frontier.put(new_node)
                 came_from[new_state] = current_node.get_state()
+                cost_so_far[new_state] = new_node.get_cost()
 
     return None
