@@ -1,6 +1,7 @@
 import util
 import ga
 import random
+import plot
 
 
 def main():
@@ -12,13 +13,17 @@ def main():
             util.City(x=int(random.random() * 200), y=int(random.random() * 200))
         )
 
-    ga.geneticAlgorithm(
+    path = ga.geneticAlgorithm(
         cityList,
         100,
         20,
-        0.01,
+        0.1,
         500,
     )
+
+    plot.distanceEvolvePlot(cityList, 100, 20, 0.01, 300)
+
+    plot.pathPlot(path)
 
 
 if __name__ == "__main__":

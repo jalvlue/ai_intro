@@ -1,4 +1,3 @@
-from os import path
 import numpy as np
 import random
 
@@ -52,7 +51,7 @@ def createRoute(cityList):
 def initialPopulation(popSize, cityList):
     population = []
 
-    for i in range(0, popSize):
+    for _ in range(0, popSize):
         population.append(createRoute(cityList))
 
     return population
