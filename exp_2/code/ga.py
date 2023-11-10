@@ -4,6 +4,10 @@ import random
 import numpy as np
 import pandas as pd
 
+"""
+@returns: sorted dict of tuples (index, fitness)
+"""
+
 
 def rankRoutes(population):
     fitnessResults = {}
@@ -11,6 +15,13 @@ def rankRoutes(population):
         fitnessResults[i] = util.Fitness(population[i]).routeFitness()
 
     return sorted(fitnessResults.items(), key=operator.itemgetter(1), reverse=True)
+
+
+"""
+@param popRanked: sorted dict of tuples (index, fitness)
+@param eliteSize: number of elite individuals
+@returns: list of indices of selected individuals
+"""
 
 
 def selection(popRanked, eliteSize):
@@ -31,11 +42,17 @@ def selection(popRanked, eliteSize):
     return selectionResults
 
 
+"""
+@returns: list of selected individuals
+"""
+
+
 def matingPool(population, selectionResults):
     matingpool = []
     for i in range(0, len(selectionResults)):
         index = selectionResults[i]
         matingpool.append(population[index])
+
     return matingpool
 
 
@@ -57,6 +74,12 @@ def breed(parent_1, parent_2):
 
     child = childP1 + childP2
     return child
+
+
+"""
+@param eliteSize: number of the best performing individuals,
+                  will automatically carry over to the next generation
+"""
 
 
 def breedPopulation(matingpool, eliteSize):
@@ -98,11 +121,15 @@ def mutatePopulation(population, mutationRate):
     return mutatedPop
 
 
-def nextGeneration(currentGen, eliteSize, mutationRate):
-    popRanked = rankRoutes(currentGen)
+def nextGeneration(currentGeneration, eliteSize, mutationRate):
+    popRanked = rankRoutes(currentGeneration)
+
     selectionResults = selection(popRanked, eliteSize)
-    matingpool = matingPool(currentGen, selectionResults)
+
+    matingpool = matingPool(currentGeneration, selectionResults)
+
     children = breedPopulation(matingpool, eliteSize)
+
     nextGeneration = mutatePopulation(children, mutationRate)
 
     return nextGeneration

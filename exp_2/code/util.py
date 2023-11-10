@@ -35,17 +35,38 @@ class Fitness:
                     toCity = self.route[0]
                 pathDistance += fromCity.distance(toCity)
             self.distance = pathDistance
+
         return self.distance
 
     def routeFitness(self):
         if self.finness == 0:
             self.fitness = 1 / float(self.routeDistance())
+
         return self.fitness
+
+
+def createCityList():
+    N = int(input("Enter number of cities: "))
+    cityList = []
+
+    for _ in range(0, N):
+        cityList.append(
+            City(x=int(random.random() * 200), y=int(random.random() * 200))
+        )
+
+    return cityList
 
 
 def createRoute(cityList):
     route = random.sample(cityList, len(cityList))
+
     return route
+
+
+"""
+@param popSize: population size
+@param cityList: list of cities
+"""
 
 
 def initialPopulation(popSize, cityList):

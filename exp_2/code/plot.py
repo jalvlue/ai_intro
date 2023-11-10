@@ -1,4 +1,3 @@
-import enum
 import util
 import ga
 import matplotlib.pyplot as plt
@@ -20,22 +19,49 @@ def distanceEvolvePlot(population, popSize, eliteSize, mutationRate, generations
 
 
 # TODO: pathPlot()
-def pathPlot(bestRoute):
-    x_coords = [util.City.x for util.City in bestRoute]
-    y_coords = [util.City.y for util.City in bestRoute]
+def pathPlot(path):
+    x = [coord[0] for coord in path]
+    y = [coord[1] for coord in path]
 
-    plt.plot(x_coords, y_coords, "o-")
+    plt.figure(figsize=(8, 6))
+    plt.plot(x, y, marker="o", linestyle="-", color="blue")
 
-    for i, city in enumerate(bestRoute):
-        plt.annotate(
-            str(i + 1),
-            (city.x, city.y),
-            textcoords="offset points",
-            xytext=(0, 10),
-            ha="center",
-        )
+    for _, coord in enumerate(path):
+        plt.text(coord[0], coord[1], f"({coord[0]},{coord[1]})", ha="right")
 
-    plt.xlabel("x")
-    plt.ylabel("y")
-
+    plt.xlabel("X")
+    plt.ylabel("Y")
+    plt.title("Route Map")
+    plt.grid(True)
     plt.show()
+
+
+route = [
+    (147, 19),
+    (162, 65),
+    (153, 80),
+    (163, 109),
+    (182, 128),
+    (181, 187),
+    (132, 177),
+    (124, 167),
+    (112, 156),
+    (93, 155),
+    (104, 196),
+    (64, 189),
+    (70, 153),
+    (11, 143),
+    (1, 127),
+    (52, 109),
+    (62, 116),
+    (59, 77),
+    (60, 50),
+    (8, 47),
+    (3, 16),
+    (8, 16),
+    (22, 36),
+    (50, 35),
+    (94, 32),
+]
+
+pathPlot(route)
