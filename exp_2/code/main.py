@@ -23,8 +23,7 @@ def main():
         generations=500,
     )
 
-    # plot.pathPlot(path)
-    print(path)
+    plot.pathPlot(path)
 
 
 if __name__ == "__main__":
