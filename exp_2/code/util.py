@@ -13,6 +13,12 @@ class City:
         distance = np.sqrt((xDis**2) + (yDis**2))
         return distance
 
+    def getX(self):
+        return self.x
+
+    def getY(self):
+        return self.y
+
     def __repr__(self) -> str:
         return "(" + str(self.x) + "," + str(self.y) + ")"
 

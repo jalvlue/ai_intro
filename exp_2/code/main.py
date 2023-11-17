@@ -1,6 +1,5 @@
 import util
 import ga
-import random
 import plot
 
 
